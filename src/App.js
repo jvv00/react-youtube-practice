@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from './components/section/Main';
 
-import Home from './views/Home'
-import Today from './views/Today'
-import Developer from './views/Developer'
-import Webd from './views/Webd'
-import Website from './views/Website'
-import Gsap from './views/Gsap'
-import Port from './views/Port'
-import Youtube from './views/Youtube'
-import Channel from './views/Channel'
-import Video from './views/Video'
-import Search from './views/Search'
-import Not from './views/Not'
+const Home = lazy(() => import('./views/Home'));
+const Today = lazy(() => import('./views/Today'));
+const Developer = lazy(() => import('./views/Developer'));
+const Webd = lazy(() => import('./views/Webd'));
+const Website = lazy(() => import('./views/Website'));
+const Gsap = lazy(() => import('./views/Gsap'));
+const Port = lazy(() => import('./views/Port'));
+const Youtube = lazy(() => import('./views/Youtube'));
+const Channel = lazy(() => import('./views/Channel'));
+const Video = lazy(() => import('./views/Video'));
+const Search = lazy(() => import('./views/Search'));
+const Not = lazy(() => import('./views/Not'));
 
 const App = () => {
     return (
         <BrowserRouter>
+            <Suspense fallback={<Main/>}>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/today' element={<Today />} />
@@ -31,6 +33,7 @@ const App = () => {
                 <Route path='/search/:searchId' element={<Search />} />
                 <Route path='*' element={<Not />} />
             </Routes>
+            </Suspense>
         </BrowserRouter>
     );
 }
